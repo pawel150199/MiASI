@@ -15,4 +15,5 @@ executing or translating structured text or binary files.
 | class number |        Subject                       | Progress|
 |:------------:| :-----------------------------------:|:-------:|
 | 1.           | Make simple calculator in ANTLR      | Done    |
+| 2.           | if condition and while loop          | WIP     |
 
