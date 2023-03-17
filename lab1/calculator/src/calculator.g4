@@ -1,20 +1,36 @@
 grammar calculator;
 
-file_ : expression* EOF;
+file_
+    :   setVar* EOF
+    ;
 
 
 expression
    :  <assoc=left> expression  POW expression                #pow
-   |  expression  op=(TIMES | DIV)  expression     #muldiv
-   |  expression  op=(PLUS | MINUS) expression     #plusmin
-   |  LPAREN expression RPAREN                  #paren
-   |  op=(PLUS | MINUS)* atom                      #atommul
+   |  expression  op=(TIMES | DIV)  expression               #muldiv
+   |  expression  op=(PLUS | MINUS) expression               #plusmin
+   |  VARIABLE                                               #var
+   |  SCIENTIFIC_NUMBER                                      #scienttific_num
+   |  LPAREN expression RPAREN                               #paren
+   |  op=(PLUS | MINUS)* atom                                #atommul
    ;
+
+setVar
+    : expression    NL                                  #printExpr
+    | expression relop expression                                  #assign
+    | NL                                                    #null
+    ;
 
 atom
    : scientific
    | variable
    ;
+
+relop :
+    GT
+    | LT
+    | EQ
+    ;
 
 scientific
    : SCIENTIFIC_NUMBER
@@ -57,7 +73,6 @@ fragment E
    : 'E' | 'e'
    ;
 
-
 fragment SIGN
    : ('+' | '-')
    ;
@@ -65,6 +80,10 @@ fragment SIGN
 
 LPAREN
    : '('
+   ;
+
+
+NL : '\n'
    ;
 
 
@@ -118,6 +137,12 @@ POW
    ;
 
 
+ID
+   : [a-zA-Z]+
+   ;
+
+
+
 WS
-   : [ \r\n\t] + -> skip
+   : [\n\r\t] + -> skip
    ;
