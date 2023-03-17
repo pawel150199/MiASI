@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
-public class calcLexer extends Lexer {
+public class arithmeticLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.11.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -86,7 +86,7 @@ public class calcLexer extends Lexer {
 	}
 
 
-	public calcLexer(CharStream input) {
+	public arithmeticLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}

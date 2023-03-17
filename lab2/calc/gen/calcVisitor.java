@@ -16,12 +16,26 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFile_(calcParser.File_Context ctx);
 	/**
-	 * Visit a parse tree produced by the {@code if_statement}
+	 * Visit a parse tree produced by the {@code assign}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIf_statement(calcParser.If_statementContext ctx);
+	T visitAssign(calcParser.AssignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expression_stat}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression_stat(calcParser.Expression_statContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code if}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf(calcParser.IfContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code while}
 	 * labeled alternative in {@link calcParser#stat}.
@@ -30,20 +44,6 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile(calcParser.WhileContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code printExpr}
-	 * labeled alternative in {@link calcParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPrintExpr(calcParser.PrintExprContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code assign}
-	 * labeled alternative in {@link calcParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssign(calcParser.AssignContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code blank}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
@@ -51,33 +51,19 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlank(calcParser.BlankContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code plus_min}
+	 * Visit a parse tree produced by the {@code nawias}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPlus_min(calcParser.Plus_minContext ctx);
+	T visitNawias(calcParser.NawiasContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code paren}
+	 * Visit a parse tree produced by the {@code mul}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParen(calcParser.ParenContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code comparison}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitComparison(calcParser.ComparisonContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code const}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConst(calcParser.ConstContext ctx);
+	T visitMul(calcParser.MulContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code pow}
 	 * labeled alternative in {@link calcParser#expression}.
@@ -86,19 +72,26 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPow(calcParser.PowContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code mul_div}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMul_div(calcParser.Mul_divContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code id}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitId(calcParser.IdContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code xd}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXd(calcParser.XdContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code comparision}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComparision(calcParser.ComparisionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code int}
 	 * labeled alternative in {@link calcParser#expression}.
@@ -107,17 +100,37 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInt(calcParser.IntContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code plus}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlus(calcParser.PlusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code stala}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStala(calcParser.StalaContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link calcParser#atom}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAtom(calcParser.AtomContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link calcParser#constant}.
+	 * Visit a parse tree produced by {@link calcParser#scientific}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitConstant(calcParser.ConstantContext ctx);
+	T visitScientific(calcParser.ScientificContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link calcParser#variable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable(calcParser.VariableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link calcParser#relop}.
 	 * @param ctx the parse tree

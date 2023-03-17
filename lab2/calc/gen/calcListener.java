@@ -17,17 +17,41 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitFile_(calcParser.File_Context ctx);
 	/**
-	 * Enter a parse tree produced by the {@code if_statement}
+	 * Enter a parse tree produced by the {@code assign}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
 	 */
-	void enterIf_statement(calcParser.If_statementContext ctx);
+	void enterAssign(calcParser.AssignContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code if_statement}
+	 * Exit a parse tree produced by the {@code assign}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
 	 */
-	void exitIf_statement(calcParser.If_statementContext ctx);
+	void exitAssign(calcParser.AssignContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code expression_stat}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression_stat(calcParser.Expression_statContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code expression_stat}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression_stat(calcParser.Expression_statContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code if}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf(calcParser.IfContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code if}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf(calcParser.IfContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code while}
 	 * labeled alternative in {@link calcParser#stat}.
@@ -41,30 +65,6 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitWhile(calcParser.WhileContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code printExpr}
-	 * labeled alternative in {@link calcParser#stat}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrintExpr(calcParser.PrintExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code printExpr}
-	 * labeled alternative in {@link calcParser#stat}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrintExpr(calcParser.PrintExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code assign}
-	 * labeled alternative in {@link calcParser#stat}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssign(calcParser.AssignContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code assign}
-	 * labeled alternative in {@link calcParser#stat}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssign(calcParser.AssignContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code blank}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
@@ -77,53 +77,29 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitBlank(calcParser.BlankContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code plus_min}
+	 * Enter a parse tree produced by the {@code nawias}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterPlus_min(calcParser.Plus_minContext ctx);
+	void enterNawias(calcParser.NawiasContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code plus_min}
+	 * Exit a parse tree produced by the {@code nawias}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitPlus_min(calcParser.Plus_minContext ctx);
+	void exitNawias(calcParser.NawiasContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code paren}
+	 * Enter a parse tree produced by the {@code mul}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterParen(calcParser.ParenContext ctx);
+	void enterMul(calcParser.MulContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code paren}
+	 * Exit a parse tree produced by the {@code mul}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitParen(calcParser.ParenContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code comparison}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterComparison(calcParser.ComparisonContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code comparison}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitComparison(calcParser.ComparisonContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code const}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterConst(calcParser.ConstContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code const}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitConst(calcParser.ConstContext ctx);
+	void exitMul(calcParser.MulContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code pow}
 	 * labeled alternative in {@link calcParser#expression}.
@@ -137,18 +113,6 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitPow(calcParser.PowContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code mul_div}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterMul_div(calcParser.Mul_divContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code mul_div}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitMul_div(calcParser.Mul_divContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code id}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
@@ -160,6 +124,30 @@ public interface calcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitId(calcParser.IdContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code xd}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterXd(calcParser.XdContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code xd}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitXd(calcParser.XdContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code comparision}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparision(calcParser.ComparisionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code comparision}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparision(calcParser.ComparisionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code int}
 	 * labeled alternative in {@link calcParser#expression}.
@@ -173,6 +161,30 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitInt(calcParser.IntContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code plus}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlus(calcParser.PlusContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code plus}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlus(calcParser.PlusContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code stala}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterStala(calcParser.StalaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code stala}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitStala(calcParser.StalaContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link calcParser#atom}.
 	 * @param ctx the parse tree
 	 */
@@ -183,15 +195,25 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitAtom(calcParser.AtomContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link calcParser#constant}.
+	 * Enter a parse tree produced by {@link calcParser#scientific}.
 	 * @param ctx the parse tree
 	 */
-	void enterConstant(calcParser.ConstantContext ctx);
+	void enterScientific(calcParser.ScientificContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link calcParser#constant}.
+	 * Exit a parse tree produced by {@link calcParser#scientific}.
 	 * @param ctx the parse tree
 	 */
-	void exitConstant(calcParser.ConstantContext ctx);
+	void exitScientific(calcParser.ScientificContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link calcParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariable(calcParser.VariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link calcParser#variable}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariable(calcParser.VariableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link calcParser#relop}.
 	 * @param ctx the parse tree

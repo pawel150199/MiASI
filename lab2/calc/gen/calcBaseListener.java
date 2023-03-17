@@ -28,13 +28,37 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIf_statement(calcParser.If_statementContext ctx) { }
+	@Override public void enterAssign(calcParser.AssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIf_statement(calcParser.If_statementContext ctx) { }
+	@Override public void exitAssign(calcParser.AssignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpression_stat(calcParser.Expression_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpression_stat(calcParser.Expression_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIf(calcParser.IfContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf(calcParser.IfContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -52,30 +76,6 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrintExpr(calcParser.PrintExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPrintExpr(calcParser.PrintExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAssign(calcParser.AssignContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAssign(calcParser.AssignContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBlank(calcParser.BlankContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -88,49 +88,25 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPlus_min(calcParser.Plus_minContext ctx) { }
+	@Override public void enterNawias(calcParser.NawiasContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPlus_min(calcParser.Plus_minContext ctx) { }
+	@Override public void exitNawias(calcParser.NawiasContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParen(calcParser.ParenContext ctx) { }
+	@Override public void enterMul(calcParser.MulContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParen(calcParser.ParenContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterComparison(calcParser.ComparisonContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComparison(calcParser.ComparisonContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterConst(calcParser.ConstContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitConst(calcParser.ConstContext ctx) { }
+	@Override public void exitMul(calcParser.MulContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -148,18 +124,6 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMul_div(calcParser.Mul_divContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMul_div(calcParser.Mul_divContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterId(calcParser.IdContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -167,6 +131,30 @@ public class calcBaseListener implements calcListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitId(calcParser.IdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXd(calcParser.XdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXd(calcParser.XdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComparision(calcParser.ComparisionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparision(calcParser.ComparisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -184,6 +172,30 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPlus(calcParser.PlusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPlus(calcParser.PlusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStala(calcParser.StalaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStala(calcParser.StalaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAtom(calcParser.AtomContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -196,13 +208,25 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConstant(calcParser.ConstantContext ctx) { }
+	@Override public void enterScientific(calcParser.ScientificContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConstant(calcParser.ConstantContext ctx) { }
+	@Override public void exitScientific(calcParser.ScientificContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable(calcParser.VariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable(calcParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

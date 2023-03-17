@@ -1,53 +1,55 @@
 grammar calc;
 
-file_ : stat*  EOF;
+file_ : stat* EOF;
 
-stat:  IF '(' cond=expression ')' '(' then=stat ')' ('else' else=stat+?)?  #if_statement
-    | WHILE '(' cond=expression ')' '(' then=stat ')'  #while
-    | expression                      # printExpr
-    |   ID relop expression NEWLINE                # assign
-    |   NEWLINE                                 # blank
+stat:
+    ID  ':=' expression NEWLINE #assign
+    |expression #expression_stat
+    |IF '('cond=expression ')''('then=stat')' ('else' else=stat+?)? #if
+    |WHILE '(' cond=expression ')' '(' then=stat ')' #while
+    |NEWLINE #blank
     ;
 
-
 expression
-   :  expression  op=POW expression             # pow
-   |  expression  op=(TIMES | DIV)  expression  # mul_div
-   |  expression  op=(PLUS | MINUS) expression  # plus_min
-   |  expression relop expression               # comparison
-   |  INT                                       # int
-   |  ID                                        # id
-   |  LPAREN expression RPAREN                  # paren
-   |  atom                                      # const
-//   |  (PLUS | MINUS)* atom                      #plmn_atom
+   :  expression relop expression #comparision
+   |  expression  POW expression #pow
+   |  expression  op=(TIMES | DIV)  expression #mul
+   |  expression  op=(PLUS | MINUS) expression #plus
+   |  LPAREN expression RPAREN #nawias
+   |  ID # id
+   |  INT #int
+   | ':=' #xd
+   |  atom #stala
    ;
 
 atom
-//   : scientific
-//   | variable
-     : constant
-//   | INT
-//   | ID
-     ;
+   : scientific
+   | variable
+   ;
 
-constant
-    : PI
-    ;
-//scientific
-//   : SCIENTIFIC_NUMBER
-//   ;
-//
-//variable
-//   : VARIABLE
-//   ;
+scientific
+   : SCIENTIFIC_NUMBER
+   ;
 
+variable
+   : VARIABLE
+   ;
 
-//VARIABLE
-//   : VALID_ID_START VALID_ID_CHAR*
-//   ;
+relop
+   : EQ
+   | GT
+   | LT
+   ;
 
-PI
-   : 'pi'
+IF
+   : 'if'
+   ;
+
+WHILE : 'while'
+   ;
+
+VARIABLE
+   : VALID_ID_START VALID_ID_CHAR*
    ;
 
 
@@ -61,9 +63,9 @@ fragment VALID_ID_CHAR
    ;
 
 //The NUMBER part gets its potential sign from "(PLUS | MINUS)* atom" in the expression rule
-//SCIENTIFIC_NUMBER
-//   : NUMBER (E SIGN? UNSIGNED_INTEGER)?
-//   ;
+SCIENTIFIC_NUMBER
+   : NUMBER (E SIGN? UNSIGNED_INTEGER)?
+   ;
 
 fragment NUMBER
    : ('0' .. '9') + ('.' ('0' .. '9') +)?
@@ -71,9 +73,6 @@ fragment NUMBER
 
 fragment UNSIGNED_INTEGER
    : ('0' .. '9')+
-   ;
-
-IF :    'if'
    ;
 
 
@@ -86,10 +85,6 @@ fragment SIGN
    : ('+' | '-')
    ;
 
-relop: EQ
-    | GT
-    | LT
-    ;
 
 LPAREN
    : '('
@@ -105,8 +100,6 @@ PLUS
    : '+'
    ;
 
-WHILE : 'while'
-    ;
 
 MINUS
    : '-'
@@ -118,8 +111,9 @@ TIMES
    ;
 
 ID
-    :   [a-zA-Z]+
-    ;
+   :   [a-zA-Z]+
+   ;
+
 
 DIV
    : '/'
@@ -152,13 +146,13 @@ POW
 
 NEWLINE:
     '\r'? '\n'
-    ;     // return newlines to parser (is end-statement signal)
-
+    ;
+    
 INT
     :
     [0-9]+
     ;
 
 WS
-   : [ \r\\t] + -> skip
+   : [ \r\n\t] + -> skip
    ;

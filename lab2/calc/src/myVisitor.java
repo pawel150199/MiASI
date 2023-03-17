@@ -9,10 +9,13 @@ public class myVisitor extends calcBaseVisitor<Integer>{
 
     @Override
     public Integer visitAssign(calcParser.AssignContext ctx) {
+        System.out.println("ID: " + ctx.ID().getText());
         String id = ctx.ID().getText();
         int value = visit(ctx.expression());
 //        System.out.println("visitAssign value: " + value + " id: " + id);
         memory.put(id, value);
+
+        System.out.println(memory);
         return value;
     }
 
@@ -23,50 +26,36 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     }
 
     @Override
-    public Integer visitParen(calcParser.ParenContext ctx) {
-        return visit(ctx.expression());
-    }
-
-    @Override
-    public Integer visitWhile(calcParser.WhileContext ctx) {
+    public Integer visitComparision(calcParser.ComparisionContext ctx) {
         Integer result = 0;
-        while(visit(ctx.cond)==1){
-            result = visit(ctx.then);
-            result -= 1;
+        switch (visit(ctx.relop())) {
+            case 0:
+                if (visit(ctx.expression(0))==visit(ctx.expression(1))) {
+                    result = 1;
+                } else {
+                    result = 0;
+                }
+                break;
+            case 1:
+                if (visit(ctx.expression(0))>visit(ctx.expression(1))) {
+                    result = 1;
+                } else {
+                    result = 0;
+                }
+                break;
+            case 2:
+                if (visit(ctx.expression(0))<visit(ctx.expression(1))) {
+                    result = 1;
+                } else {
+                    result = 0;
+                }
+                break;
         }
-        return  result;
-        //return super.visitWhile(ctx);
+        return result;
     }
 
     @Override
-    public Integer visitInt(calcParser.IntContext ctx) {
-        return Integer.valueOf(ctx.INT().getText());
-    }
-
-    @Override
-    public Integer visitPrintExpr(calcParser.PrintExprContext ctx) {
-        Integer value = visit(ctx.expression());
-        System.out.println("Wynik: " + value);
-        return value;
-    }
-
-
-    @Override
-    public Integer visitIf_statement(calcParser.If_statementContext ctx) {
-        Integer result = 0;
-        if (visit(ctx.cond)==1) {
-            result = visit(ctx.then);
-        } else {
-            if (ctx.else_ != null ) {
-                result =  visit(ctx.else_);
-            }
-        }
-        return  result;
-        //return super.visitIf_statement(ctx);
-    }
-
-    @Override
-    public Integer visitPlus_min(calcParser.Plus_minContext ctx) {
+    public Integer visitPlus(calcParser.PlusContext ctx) {
         Integer result = 0;
 //        System.out.println("VisitPlus");
         switch (ctx.op.getType()){
@@ -82,62 +71,7 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     }
 
     @Override
-    public Integer visitRelop(calcParser.RelopContext ctx) {
-        Integer result = null;
-
-        if (ctx.EQ() != null)  result = 0;
-        if (ctx.GT() != null ) result = 1;
-        if (ctx.LT() != null ) result = 2;
-        return result;
-        //return super.visitRelop(ctx);
-    }
-
-    @Override
-    public Integer visitComparison(calcParser.ComparisonContext ctx) {
-        Integer result = 0;
-        switch (visit(ctx.relop())) {
-            case 0:
-                if (visit(ctx.expression(0))==visit(ctx.expression(1))) {
-                    System.out.println("TRUE");
-                    result = 1;
-                } else {
-                    System.out.println("FALSE");
-                    result = 0;
-                }
-                break;
-            case 1:
-                if (visit(ctx.expression(0))>visit(ctx.expression(1))) {
-                    System.out.println("TRUExxx");
-                    result = 1;
-                } else {
-                    System.out.println("FALSExxx");
-                    result = 0;
-                }
-                break;
-            case 2:
-                if (visit(ctx.expression(0))<visit(ctx.expression(1))) {
-                    result = 1;
-                } else {
-                    result = 0;
-                }
-                break;
-        }
-        return result;
-        //return super.visitComparison(ctx);
-    }
-
-    @Override
-    public Integer visitPow(calcParser.PowContext ctx) {
-        Integer result = 1;
-        for (int i = 0; i < visit(ctx.expression(1)); i++) {
-            result = result * visit(ctx.expression(0));
-
-        }
-        return result;
-    }
-
-    @Override
-    public Integer visitMul_div(calcParser.Mul_divContext ctx) {
+    public Integer visitMul(calcParser.MulContext ctx) {
         Integer result = 0;
         switch (ctx.op.getType()){
             case calcLexer.TIMES -> {
@@ -151,8 +85,77 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     }
 
     @Override
-    public Integer visitConst(calcParser.ConstContext ctx) {
-        int result = 3;
+    public Integer visitIf(calcParser.IfContext ctx) {
+        Integer result = 0;
+        if (visit(ctx.cond)==1) {
+            result = visit(ctx.then);
+        } else {
+            if (ctx.else_ != null ) {
+                result =  visit(ctx.else_);
+            }
+        }
+        return  result;
+    }
+
+    @Override
+    public Integer visitNawias(calcParser.NawiasContext ctx) {
+        return visit(ctx.expression());
+    }
+
+    @Override
+    public Integer visitWhile(calcParser.WhileContext ctx) {
+        Integer result = 0;
+        while(visit(ctx.cond)==1){
+            result = visit(ctx.then);
+            result -= 1;
+        }
+        return  result;
+        //return super.visitWhile(ctx);
+    }
+
+    @Override
+    public Integer visitExpression_stat(calcParser.Expression_statContext ctx) {
+        Integer value = visit(ctx.expression());
+        //System.out.println("Wynik: " + value);
+        return value;
+    }
+
+    @Override
+    public Integer visitInt(calcParser.IntContext ctx) {
+        return Integer.valueOf(ctx.INT().getText());
+    }
+
+    @Override
+    public Integer visitRelop(calcParser.RelopContext ctx) {
+        Integer result = null;
+
+        if (ctx.EQ() != null)  result = 0;
+        if (ctx.GT() != null ) result = 1;
+        if (ctx.LT() != null ) result = 2;
+        return result;
+        //return super.visitRelop(ctx);
+    }
+
+    @Override
+    public Integer visitStala(calcParser.StalaContext ctx) {
+        System.out.println("TYP: " + ctx.atom().getText());
+        System.out.println("STAŁA: " + memory.get(ctx.atom().getText()));
+        Integer result = memory.get(ctx.atom().getText());
+        return result;
+    }
+
+    @Override
+    public Integer visitScientific(calcParser.ScientificContext ctx) {
+        return Integer.parseInt(ctx.SCIENTIFIC_NUMBER().getText());
+    }
+
+    @Override
+    public Integer visitPow(calcParser.PowContext ctx) {
+        Integer result = 1;
+        for (int i = 0; i < visit(ctx.expression(1)); i++) {
+            result = result * visit(ctx.expression(0));
+
+        }
         return result;
     }
 }
