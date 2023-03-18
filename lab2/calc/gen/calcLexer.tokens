@@ -1,5 +1,5 @@
 T__0=1
-T__1=2
+PRZ=2
 IF=3
 WHILE=4
 VARIABLE=5
@@ -19,8 +19,8 @@ POW=18
 NEWLINE=19
 INT=20
 WS=21
-':='=1
-'else'=2
+'else'=1
+':='=2
 'if'=3
 'while'=4
 '('=7

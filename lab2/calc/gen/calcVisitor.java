@@ -16,19 +16,19 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFile_(calcParser.File_Context ctx);
 	/**
-	 * Visit a parse tree produced by the {@code assign}
-	 * labeled alternative in {@link calcParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssign(calcParser.AssignContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code expression_stat}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExpression_stat(calcParser.Expression_statContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code assign}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssign(calcParser.AssignContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code if}
 	 * labeled alternative in {@link calcParser#stat}.
@@ -72,19 +72,12 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPow(calcParser.PowContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code id}
+	 * Visit a parse tree produced by the {@code indsgjhosdkgkods}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitId(calcParser.IdContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code xd}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitXd(calcParser.XdContext ctx);
+	T visitIndsgjhosdkgkods(calcParser.IndsgjhosdkgkodsContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code comparision}
 	 * labeled alternative in {@link calcParser#expression}.
@@ -92,13 +85,6 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitComparision(calcParser.ComparisionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code int}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInt(calcParser.IntContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code plus}
 	 * labeled alternative in {@link calcParser#expression}.

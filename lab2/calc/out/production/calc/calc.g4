@@ -2,8 +2,9 @@ grammar calc;
 
 file_ : stat* EOF;
 
-stat:ID  ':=' expression NEWLINE #assign
-    |expression #expression_stat
+stat:
+     expression  #expression_stat
+    |VARIABLE PRZ expression NEWLINE #assign
     |IF '('cond=expression ')''('then=stat')' ('else' else=stat+?)? #if
     |WHILE '(' cond=expression ')' '(' then=stat ')' #while
     |NEWLINE #blank
@@ -15,9 +16,7 @@ expression
    |  expression  op=(TIMES | DIV)  expression #mul
    |  expression  op=(PLUS | MINUS) expression #plus
    |  LPAREN expression RPAREN #nawias
-   |  ID # id
-   |  INT #int
-   | ':=' #xd
+   | INT # indsgjhosdkgkods
    |  atom #stala
    ;
 
@@ -39,6 +38,10 @@ relop
    | GT
    | LT
    ;
+
+PRZ:
+    ':='
+    ;
 
 IF
    : 'if'
@@ -132,6 +135,7 @@ LT
 EQ
    : '='
    ;
+
 
 
 POINT

@@ -9,21 +9,23 @@ public class myVisitor extends calcBaseVisitor<Integer>{
 
     @Override
     public Integer visitAssign(calcParser.AssignContext ctx) {
-        System.out.println("ID: " + ctx.ID().getText());
-        String id = ctx.ID().getText();
+        System.out.println("ID: " + ctx.VARIABLE().getText());
+        String id = ctx.VARIABLE().getText();
         int value = visit(ctx.expression());
 //        System.out.println("visitAssign value: " + value + " id: " + id);
         memory.put(id, value);
-
-        System.out.println(memory);
         return value;
     }
 
+    /*
     @Override
     public Integer visitId(calcParser.IdContext ctx) {
         String id = ctx.ID().getText();
-        return memory.get(id);
+        if (memory.containsKey(id)) return memory.get(id);
+        return 0;
     }
+
+    */
 
     @Override
     public Integer visitComparision(calcParser.ComparisionContext ctx) {
@@ -116,14 +118,16 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     @Override
     public Integer visitExpression_stat(calcParser.Expression_statContext ctx) {
         Integer value = visit(ctx.expression());
-        //System.out.println("Wynik: " + value);
+        System.out.println("Wynik: " + value);
         return value;
     }
 
+    /*
     @Override
     public Integer visitInt(calcParser.IntContext ctx) {
         return Integer.valueOf(ctx.INT().getText());
     }
+    */
 
     @Override
     public Integer visitRelop(calcParser.RelopContext ctx) {
@@ -136,12 +140,24 @@ public class myVisitor extends calcBaseVisitor<Integer>{
         //return super.visitRelop(ctx);
     }
 
+
     @Override
     public Integer visitStala(calcParser.StalaContext ctx) {
+        Integer result = 0;
         System.out.println("TYP: " + ctx.atom().getText());
         System.out.println("STAŁA: " + memory.get(ctx.atom().getText()));
-        Integer result = memory.get(ctx.atom().getText());
+        System.out.println(memory.keySet());
+        if (memory.containsKey(ctx.atom().getText())) {
+            System.out.println("MICHAS: " + Integer.parseInt(ctx.atom().getText()));
+            result = Integer.parseInt(ctx.atom().getText());
+        }
         return result;
+    }
+
+    @Override
+    public Integer visitAtom(calcParser.AtomContext ctx) {
+
+        return super.visitAtom(ctx);
     }
 
     @Override

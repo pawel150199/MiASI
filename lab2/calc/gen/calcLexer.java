@@ -16,7 +16,7 @@ public class calcLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, IF=3, WHILE=4, VARIABLE=5, SCIENTIFIC_NUMBER=6, LPAREN=7, 
+		T__0=1, PRZ=2, IF=3, WHILE=4, VARIABLE=5, SCIENTIFIC_NUMBER=6, LPAREN=7, 
 		RPAREN=8, PLUS=9, MINUS=10, TIMES=11, ID=12, DIV=13, GT=14, LT=15, EQ=16, 
 		POINT=17, POW=18, NEWLINE=19, INT=20, WS=21;
 	public static String[] channelNames = {
@@ -29,7 +29,7 @@ public class calcLexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"T__0", "T__1", "IF", "WHILE", "VARIABLE", "VALID_ID_START", "VALID_ID_CHAR", 
+			"T__0", "PRZ", "IF", "WHILE", "VARIABLE", "VALID_ID_START", "VALID_ID_CHAR", 
 			"SCIENTIFIC_NUMBER", "NUMBER", "UNSIGNED_INTEGER", "E", "SIGN", "LPAREN", 
 			"RPAREN", "PLUS", "MINUS", "TIMES", "ID", "DIV", "GT", "LT", "EQ", "POINT", 
 			"POW", "NEWLINE", "INT", "WS"
@@ -39,14 +39,14 @@ public class calcLexer extends Lexer {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "':='", "'else'", "'if'", "'while'", null, null, "'('", "')'", 
+			null, "'else'", "':='", "'if'", "'while'", null, null, "'('", "')'", 
 			"'+'", "'-'", "'*'", null, "'/'", "'>'", "'<'", "'='", "'.'", "'^'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, "IF", "WHILE", "VARIABLE", "SCIENTIFIC_NUMBER", "LPAREN", 
+			null, null, "PRZ", "IF", "WHILE", "VARIABLE", "SCIENTIFIC_NUMBER", "LPAREN", 
 			"RPAREN", "PLUS", "MINUS", "TIMES", "ID", "DIV", "GT", "LT", "EQ", "POINT", 
 			"POW", "NEWLINE", "INT", "WS"
 		};
@@ -119,7 +119,7 @@ public class calcLexer extends Lexer {
 		"\u0002\u0012\u0007\u0012\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014"+
 		"\u0002\u0015\u0007\u0015\u0002\u0016\u0007\u0016\u0002\u0017\u0007\u0017"+
 		"\u0002\u0018\u0007\u0018\u0002\u0019\u0007\u0019\u0002\u001a\u0007\u001a"+
-		"\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001"+
 		"\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0003"+
 		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0004"+
 		"\u0001\u0004\u0005\u0004K\b\u0004\n\u0004\f\u0004N\t\u0004\u0001\u0005"+
@@ -150,7 +150,7 @@ public class calcLexer extends Lexer {
 		"\u0000\u0000\u0000)\u0001\u0000\u0000\u0000\u0000+\u0001\u0000\u0000\u0000"+
 		"\u0000-\u0001\u0000\u0000\u0000\u0000/\u0001\u0000\u0000\u0000\u00001"+
 		"\u0001\u0000\u0000\u0000\u00003\u0001\u0000\u0000\u0000\u00005\u0001\u0000"+
-		"\u0000\u0000\u00017\u0001\u0000\u0000\u0000\u0003:\u0001\u0000\u0000\u0000"+
+		"\u0000\u0000\u00017\u0001\u0000\u0000\u0000\u0003<\u0001\u0000\u0000\u0000"+
 		"\u0005?\u0001\u0000\u0000\u0000\u0007B\u0001\u0000\u0000\u0000\tH\u0001"+
 		"\u0000\u0000\u0000\u000bP\u0001\u0000\u0000\u0000\rT\u0001\u0000\u0000"+
 		"\u0000\u000fV\u0001\u0000\u0000\u0000\u0011`\u0001\u0000\u0000\u0000\u0013"+
@@ -161,9 +161,9 @@ public class calcLexer extends Lexer {
 		"\u0000\u0000\u0000\'\u0086\u0001\u0000\u0000\u0000)\u0088\u0001\u0000"+
 		"\u0000\u0000+\u008a\u0001\u0000\u0000\u0000-\u008c\u0001\u0000\u0000\u0000"+
 		"/\u008e\u0001\u0000\u0000\u00001\u0091\u0001\u0000\u0000\u00003\u0096"+
-		"\u0001\u0000\u0000\u00005\u009b\u0001\u0000\u0000\u000078\u0005:\u0000"+
-		"\u000089\u0005=\u0000\u00009\u0002\u0001\u0000\u0000\u0000:;\u0005e\u0000"+
-		"\u0000;<\u0005l\u0000\u0000<=\u0005s\u0000\u0000=>\u0005e\u0000\u0000"+
+		"\u0001\u0000\u0000\u00005\u009b\u0001\u0000\u0000\u000078\u0005e\u0000"+
+		"\u000089\u0005l\u0000\u00009:\u0005s\u0000\u0000:;\u0005e\u0000\u0000"+
+		";\u0002\u0001\u0000\u0000\u0000<=\u0005:\u0000\u0000=>\u0005=\u0000\u0000"+
 		">\u0004\u0001\u0000\u0000\u0000?@\u0005i\u0000\u0000@A\u0005f\u0000\u0000"+
 		"A\u0006\u0001\u0000\u0000\u0000BC\u0005w\u0000\u0000CD\u0005h\u0000\u0000"+
 		"DE\u0005i\u0000\u0000EF\u0005l\u0000\u0000FG\u0005e\u0000\u0000G\b\u0001"+
