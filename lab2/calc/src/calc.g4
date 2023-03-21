@@ -3,21 +3,22 @@ grammar calc;
 file_ : stat* EOF;
 
 stat:
-     expression  #expression_stat
-    |VARIABLE PRZ expression NEWLINE #assign
-    |IF '('cond=expression ')''('then=stat')' ('else' else=stat+?)? #if
-    |WHILE '(' cond=expression ')' '(' then=stat ')' #while
-    |NEWLINE #blank
+        expression                                                          #expression_stat
+    |   VARIABLE PRZ expression                                             #assign
+    |   IF '('cond=expression ')''('then=stat')' ('else' else=stat+?)?      #if
+    |   WHILE '(' cond=expression ')' '(' then=stat ')'                     #while
+    |   '(' stat* ')'                                                       #bodyofwhile
+    |   NEWLINE                                                             #blank
     ;
 
 expression
-   :  expression relop expression #comparision
-   |  expression  POW expression #pow
-   |  expression  op=(TIMES | DIV)  expression #mul
-   |  expression  op=(PLUS | MINUS) expression #plus
-   |  LPAREN expression RPAREN #nawias
-   | INT # indsgjhosdkgkods
-   |  atom #stala
+   :  expression relop expression                                           #comparision
+   |  expression  POW expression                                            #pow
+   |  expression  op=(TIMES | DIV)  expression                              #mul
+   |  expression  op=(PLUS | MINUS) expression                              #plus
+   |  LPAREN expression RPAREN                                              #nawias
+   |  INT                                                                   #intek
+   |  atom                                                                  #stala
    ;
 
 atom
@@ -95,6 +96,15 @@ LPAREN
 
 RPAREN
    : ')'
+   ;
+
+CURLYLPAREN
+   : '{'
+   ;
+
+
+CURLYRPAREN
+   : '}'
    ;
 
 

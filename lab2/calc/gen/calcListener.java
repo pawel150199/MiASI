@@ -65,6 +65,18 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitWhile(calcParser.WhileContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code bodyofwhile}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyofwhile(calcParser.BodyofwhileContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code bodyofwhile}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyofwhile(calcParser.BodyofwhileContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code blank}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
@@ -113,18 +125,6 @@ public interface calcListener extends ParseTreeListener {
 	 */
 	void exitPow(calcParser.PowContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code indsgjhosdkgkods}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterIndsgjhosdkgkods(calcParser.IndsgjhosdkgkodsContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code indsgjhosdkgkods}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitIndsgjhosdkgkods(calcParser.IndsgjhosdkgkodsContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code comparision}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
@@ -136,6 +136,18 @@ public interface calcListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitComparision(calcParser.ComparisionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code intek}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntek(calcParser.IntekContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code intek}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntek(calcParser.IntekContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code plus}
 	 * labeled alternative in {@link calcParser#expression}.

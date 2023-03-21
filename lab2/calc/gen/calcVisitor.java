@@ -44,6 +44,13 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile(calcParser.WhileContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code bodyofwhile}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyofwhile(calcParser.BodyofwhileContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code blank}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
@@ -72,19 +79,19 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPow(calcParser.PowContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code indsgjhosdkgkods}
-	 * labeled alternative in {@link calcParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIndsgjhosdkgkods(calcParser.IndsgjhosdkgkodsContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code comparision}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitComparision(calcParser.ComparisionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code intek}
+	 * labeled alternative in {@link calcParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntek(calcParser.IntekContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code plus}
 	 * labeled alternative in {@link calcParser#expression}.

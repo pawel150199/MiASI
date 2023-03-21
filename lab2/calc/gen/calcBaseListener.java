@@ -76,6 +76,18 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBodyofwhile(calcParser.BodyofwhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBodyofwhile(calcParser.BodyofwhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlank(calcParser.BlankContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -124,18 +136,6 @@ public class calcBaseListener implements calcListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIndsgjhosdkgkods(calcParser.IndsgjhosdkgkodsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIndsgjhosdkgkods(calcParser.IndsgjhosdkgkodsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterComparision(calcParser.ComparisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,6 +143,18 @@ public class calcBaseListener implements calcListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitComparision(calcParser.ComparisionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntek(calcParser.IntekContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntek(calcParser.IntekContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

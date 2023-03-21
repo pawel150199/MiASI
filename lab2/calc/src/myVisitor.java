@@ -11,20 +11,11 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     public Integer visitAssign(calcParser.AssignContext ctx) {
         //System.out.println("ID: " + ctx.VARIABLE().getText());
         String id = ctx.VARIABLE().getText();
-        Integer value = Integer.parseInt(ctx.expression().getText());
+        System.out.println("XDDDD: " + visit(ctx.expression()));
+        Integer value = visit(ctx.expression());
         memory.put(id, value);
         return value;
     }
-
-    /*
-    @Override
-    public Integer visitId(calcParser.IdContext ctx) {
-        String id = ctx.ID().getText();
-        if (memory.containsKey(id)) return memory.get(id);
-        return 0;
-    }
-
-    */
 
     @Override
     public Integer visitComparision(calcParser.ComparisionContext ctx) {
@@ -56,38 +47,14 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     }
 
     @Override
-    public Integer visitPlus(calcParser.PlusContext ctx) {
-        Integer result = 0;
-        switch (ctx.op.getType()){
-            case calcLexer.PLUS -> {
-//                System.out.println(visit(ctx.expression(0)));
-                result = visit(ctx.expression(0))+visit(ctx.expression(1));
-            }
-            case calcLexer.MINUS -> {
-                result = visit(ctx.expression(0))-visit(ctx.expression(1));
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public Integer visitMul(calcParser.MulContext ctx) {
-        Integer result = 0;
-        switch (ctx.op.getType()){
-            case calcLexer.TIMES -> {
-                result = visit(ctx.expression(0)) * visit(ctx.expression(1));
-            }
-            case calcLexer.DIV -> {
-                result = visit(ctx.expression(0)) / visit(ctx.expression(1));
-            }
-        }
-        return result;
+    public Integer visitFile_(calcParser.File_Context ctx) {
+        return Integer.parseInt(String.valueOf(visit(ctx.stat(0))));
     }
 
     @Override
     public Integer visitIf(calcParser.IfContext ctx) {
         Integer result = 0;
-        if (visit(ctx.cond)==1) {
+        if (visit(ctx.cond)!=0) {
             result = visit(ctx.then);
         } else {
             if (ctx.else_ != null ) {
@@ -105,12 +72,13 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     @Override
     public Integer visitWhile(calcParser.WhileContext ctx) {
         Integer result = 0;
-        while(visit(ctx.cond)==1){
+        Integer status = visit(ctx.cond);
+        while(status==1) {
             result = visit(ctx.then);
-            result -= 1;
+            System.out.println(visit(ctx.then));
+            break;
         }
-        return  result;
-        //return super.visitWhile(ctx);
+        return result;
     }
 
     @Override
@@ -119,13 +87,6 @@ public class myVisitor extends calcBaseVisitor<Integer>{
         System.out.println("WYNIK: " + value);
         return value;
     }
-
-    /*
-    @Override
-    public Integer visitInt(calcParser.IntContext ctx) {
-        return Integer.valueOf(ctx.INT().getText());
-    }
-    */
 
     @Override
     public Integer visitRelop(calcParser.RelopContext ctx) {
@@ -159,12 +120,42 @@ public class myVisitor extends calcBaseVisitor<Integer>{
         return Integer.parseInt(ctx.SCIENTIFIC_NUMBER().getText());
     }
 
+    // Math expressions
     @Override
     public Integer visitPow(calcParser.PowContext ctx) {
         Integer result = 1;
         for (int i = 0; i < visit(ctx.expression(1)); i++) {
             result = result * visit(ctx.expression(0));
 
+        }
+        return result;
+    }
+
+    @Override
+    public Integer visitMul(calcParser.MulContext ctx) {
+        Integer result = 0;
+        switch (ctx.op.getType()){
+            case calcLexer.TIMES -> {
+                result = visit(ctx.expression(0)) * visit(ctx.expression(1));
+            }
+            case calcLexer.DIV -> {
+                result = visit(ctx.expression(0)) / visit(ctx.expression(1));
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public Integer visitPlus(calcParser.PlusContext ctx) {
+        Integer result = 0;
+        switch (ctx.op.getType()){
+            case calcLexer.PLUS -> {
+//                System.out.println(visit(ctx.expression(0)));
+                result = visit(ctx.expression(0))+visit(ctx.expression(1));
+            }
+            case calcLexer.MINUS -> {
+                result = visit(ctx.expression(0))-visit(ctx.expression(1));
+            }
         }
         return result;
     }
