@@ -30,6 +30,6 @@ public class Main {
         // create a visitor to traverse the parse tree
         myVisitor visitor = new myVisitor();
         Integer output = visitor.visit(tree);
-//        System.out.println("Wynik operacji: " + output);
+        // System.out.println("Wynik operacji: " + output);
     }
 }

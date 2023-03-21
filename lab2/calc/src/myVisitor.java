@@ -116,6 +116,7 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     @Override
     public Integer visitExpression_stat(calcParser.Expression_statContext ctx) {
         Integer value = visit(ctx.expression());
+        System.out.println("WYNIK: " + value);
         return value;
     }
 
