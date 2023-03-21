@@ -9,10 +9,9 @@ public class myVisitor extends calcBaseVisitor<Integer>{
 
     @Override
     public Integer visitAssign(calcParser.AssignContext ctx) {
-        System.out.println("ID: " + ctx.VARIABLE().getText());
+        //System.out.println("ID: " + ctx.VARIABLE().getText());
         String id = ctx.VARIABLE().getText();
-        int value = visit(ctx.expression());
-//        System.out.println("visitAssign value: " + value + " id: " + id);
+        Integer value = Integer.parseInt(ctx.expression().getText());
         memory.put(id, value);
         return value;
     }
@@ -59,14 +58,13 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     @Override
     public Integer visitPlus(calcParser.PlusContext ctx) {
         Integer result = 0;
-//        System.out.println("VisitPlus");
         switch (ctx.op.getType()){
             case calcLexer.PLUS -> {
 //                System.out.println(visit(ctx.expression(0)));
-                result = visit(ctx.expression(0)) + visit(ctx.expression(1));
+                result = visit(ctx.expression(0))+visit(ctx.expression(1));
             }
             case calcLexer.MINUS -> {
-                result = visit(ctx.expression(0)) - visit(ctx.expression(1));
+                result = visit(ctx.expression(0))-visit(ctx.expression(1));
             }
         }
         return result;
@@ -118,7 +116,6 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     @Override
     public Integer visitExpression_stat(calcParser.Expression_statContext ctx) {
         Integer value = visit(ctx.expression());
-        System.out.println("Wynik: " + value);
         return value;
     }
 
@@ -140,16 +137,11 @@ public class myVisitor extends calcBaseVisitor<Integer>{
         //return super.visitRelop(ctx);
     }
 
-
     @Override
     public Integer visitStala(calcParser.StalaContext ctx) {
         Integer result = 0;
-        System.out.println("TYP: " + ctx.atom().getText());
-        System.out.println("STAŁA: " + memory.get(ctx.atom().getText()));
-        System.out.println(memory.keySet());
-        if (memory.containsKey(ctx.atom().getText())) {
-            System.out.println("MICHAS: " + Integer.parseInt(ctx.atom().getText()));
-            result = Integer.parseInt(ctx.atom().getText());
+        if (memory.keySet().contains(ctx.atom().getText())) {
+            result = memory.get(ctx.atom().getText());
         }
         return result;
     }
