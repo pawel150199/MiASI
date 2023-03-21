@@ -143,7 +143,8 @@ public class myVisitor extends calcBaseVisitor<Integer>{
         Integer result = 0;
         if (memory.keySet().contains(ctx.atom().getText())) {
             result = memory.get(ctx.atom().getText());
-        }
+        } else
+            result = Integer.parseInt(ctx.atom().getText());
         return result;
     }
 
