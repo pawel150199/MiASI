@@ -1,0 +1,15 @@
+group pierwszy;
+
+deflt(elem) ::= <<
+    <elem; separator="\n">
+>>
+
+int(i) ::= <<
+    mam liczbę:<i>
+>>
+
+dodaj(p1, p2) ::= "Najpierw | <p1>| potem |<p2>| i jzuz"
+
+dek(n) ::= <<
+  DD <n>
+>>
