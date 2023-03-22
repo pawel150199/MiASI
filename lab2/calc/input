@@ -1,3 +1,17 @@
-a=5
-b=4
-if (a) (b) else a
+// Test dla funkcji
+def abc()
+(x:=1
+print x
+)
+abc()
+
+// Test dla ifa
+a:=2
+if (a>1) (a+1) else 0
+
+// Test dla while
+a:=2
+while (a<10) (a)
+
+// Test dla fora
+for (1) (10) (1)

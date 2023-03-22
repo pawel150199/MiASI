@@ -44,12 +44,40 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhile(calcParser.WhileContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code bodyofwhile}
+	 * Visit a parse tree produced by the {@code functionDecl}
 	 * labeled alternative in {@link calcParser#stat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBodyofwhile(calcParser.BodyofwhileContext ctx);
+	T visitFunctionDecl(calcParser.FunctionDeclContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code functionCall}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCall(calcParser.FunctionCallContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code for}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor(calcParser.ForContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code while_stat}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile_stat(calcParser.While_statContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code printExpr}
+	 * labeled alternative in {@link calcParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintExpr(calcParser.PrintExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code blank}
 	 * labeled alternative in {@link calcParser#stat}.
@@ -86,12 +114,12 @@ public interface calcVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitComparision(calcParser.ComparisionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code intek}
+	 * Visit a parse tree produced by the {@code int}
 	 * labeled alternative in {@link calcParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIntek(calcParser.IntekContext ctx);
+	T visitInt(calcParser.IntContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code plus}
 	 * labeled alternative in {@link calcParser#expression}.

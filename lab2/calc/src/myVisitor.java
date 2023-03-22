@@ -2,17 +2,52 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class myVisitor extends calcBaseVisitor<Integer>{
 
     Map<String, Integer> memory = new HashMap<String, Integer>();
+    Map<String, List<calcParser.StatContext>> functions = new HashMap<>();
+
+    @Override
+    public Integer visitFor(calcParser.ForContext ctx) {
+        Integer result = 0;
+        for (int i = visit(ctx.expression(0)); i < visit(ctx.expression(1)); i++) {
+            result = visit(ctx.then);
+        }
+        return result;
+    }
+
+    /*
+    @Override
+    public Integer visitFunctionDecl(calcParser.FunctionDeclContext ctx) {
+        String functionName = ctx.funcName.getText();
+        var body = ctx.stat();
+        functions.put(functionName, body);
+        return 0;
+    }
+
+    @Override
+    public Integer visitFunctionCall(calcParser.FunctionCallContext ctx) {
+        try {
+            List<calcParser.StatContext> body = functions.get(ctx.funcName.getText());
+            for (var expr:
+                    body) {
+                visit(expr);
+            }
+        } catch (NullPointerException e){
+            System.out.println("Function was not defined");
+        }
+        return 0;
+    }
+    */
 
     @Override
     public Integer visitAssign(calcParser.AssignContext ctx) {
         //System.out.println("ID: " + ctx.VARIABLE().getText());
         String id = ctx.VARIABLE().getText();
-        System.out.println("XDDDD: " + visit(ctx.expression()));
         Integer value = visit(ctx.expression());
+
         memory.put(id, value);
         return value;
     }
@@ -46,10 +81,12 @@ public class myVisitor extends calcBaseVisitor<Integer>{
         return result;
     }
 
+    /*
     @Override
     public Integer visitFile_(calcParser.File_Context ctx) {
         return Integer.parseInt(String.valueOf(visit(ctx.stat(0))));
     }
+    */
 
     @Override
     public Integer visitIf(calcParser.IfContext ctx) {
@@ -70,13 +107,18 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     }
 
     @Override
+    public Integer visitPrintExpr(calcParser.PrintExprContext ctx) {
+        Integer val = visit(ctx.expression());
+        System.out.println(val);
+        return 0;
+    }
+
+    @Override
     public Integer visitWhile(calcParser.WhileContext ctx) {
         Integer result = 0;
         Integer status = visit(ctx.cond);
         while(status==1) {
             result = visit(ctx.then);
-            System.out.println(visit(ctx.then));
-            break;
         }
         return result;
     }
@@ -84,7 +126,7 @@ public class myVisitor extends calcBaseVisitor<Integer>{
     @Override
     public Integer visitExpression_stat(calcParser.Expression_statContext ctx) {
         Integer value = visit(ctx.expression());
-        System.out.println("WYNIK: " + value);
+        System.out.println("Wynik: " + value);
         return value;
     }
 
@@ -111,7 +153,6 @@ public class myVisitor extends calcBaseVisitor<Integer>{
 
     @Override
     public Integer visitAtom(calcParser.AtomContext ctx) {
-
         return super.visitAtom(ctx);
     }
 
@@ -158,5 +199,27 @@ public class myVisitor extends calcBaseVisitor<Integer>{
             }
         }
         return result;
+    }
+
+    @Override
+    public Integer visitFunctionDecl(calcParser.FunctionDeclContext ctx) {
+        String functionName = ctx.funcName.getText();
+        var body = ctx.stat();
+        functions.put(functionName, body);
+        return 0;
+    }
+
+    @Override
+    public Integer visitFunctionCall(calcParser.FunctionCallContext ctx) {
+        try {
+            List<calcParser.StatContext> body = functions.get(ctx.funcName.getText());
+            for (var expression:
+                    body) {
+                visit(expression);
+            }
+        } catch (NullPointerException e){
+            System.out.println("Nie ma takiej funkcji");
+        }
+        return 0;
     }
 }

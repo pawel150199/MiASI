@@ -3,22 +3,26 @@ grammar calc;
 file_ : stat* EOF;
 
 stat:
-        expression                                                          #expression_stat
-    |   VARIABLE PRZ expression                                             #assign
-    |   IF '('cond=expression ')''('then=stat')' ('else' else=stat+?)?      #if
-    |   WHILE '(' cond=expression ')' '(' then=stat ')'                     #while
-    |   '(' stat* ')'                                                       #bodyofwhile
-    |   NEWLINE                                                             #blank
+        expression                                                                          #expression_stat
+    |   VARIABLE PRZ expression NEWLINE                                                     #assign
+    |   IF '('cond=expression ')''('then=stat')' ('else' else=stat+?)?                      #if
+    |   WHILE '(' cond=expression ')' '(' then=stat ')'                                     #while
+    |   'def' funcName=VARIABLE'('')'  NEWLINE '(' funcBody=stat* ')'                       #functionDecl
+    |    funcName=VARIABLE '('')' NEWLINE                                                   #functionCall
+    |   FOR '('min=expression')' '('max=expression')' '(' then=stat ')'                     #for
+    |   '('stat')'                                                                          #while_stat
+    |   'print' expression NEWLINE                                                          # printExpr
+    |   NEWLINE                                                                             #blank
     ;
 
 expression
-   :  expression relop expression                                           #comparision
-   |  expression  POW expression                                            #pow
-   |  expression  op=(TIMES | DIV)  expression                              #mul
-   |  expression  op=(PLUS | MINUS) expression                              #plus
-   |  LPAREN expression RPAREN                                              #nawias
-   |  INT                                                                   #intek
-   |  atom                                                                  #stala
+   :  expression relop expression                                                           #comparision
+   |  expression  POW expression                                                            #pow
+   |  expression  op=(TIMES | DIV)  expression                                              #mul
+   |  expression  op=(PLUS | MINUS) expression                                              #plus
+   |  LPAREN expression RPAREN                                                              #nawias
+   |  INT                                                                                   #int
+   |  atom                                                                                  #stala
    ;
 
 atom
@@ -49,6 +53,9 @@ IF
    ;
 
 WHILE : 'while'
+   ;
+
+FOR : 'for'
    ;
 
 VARIABLE
@@ -98,21 +105,14 @@ RPAREN
    : ')'
    ;
 
-CURLYLPAREN
-   : '{'
-   ;
-
-
-CURLYRPAREN
-   : '}'
-   ;
-
 
 PLUS
    : '+'
    ;
 
-
+ŚREDNIK
+    : ';'
+    ;
 MINUS
    : '-'
    ;
@@ -160,11 +160,14 @@ POW
 NEWLINE:
     '\r'? '\n'
     ;
-    
+
 INT
     :
     [0-9]+
     ;
+
+BEGINFUNC: 'begin';
+ENDFUNC: 'end';
 
 WS
    : [ \r\n\t] + -> skip
