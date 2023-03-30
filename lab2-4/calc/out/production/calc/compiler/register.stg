@@ -1,0 +1,91 @@
+group pierwszy;
+
+deflt(elem) ::= <<
+<elem; separator="\n">
+>>
+
+int(i) ::= <<
+MOV A, #<i>
+>>
+
+comparision_equal(p1, p2, xx) ::= <<
+<twoop(p1,p2)>
+SUB A,B
+JE EQ_<xx>
+MOV A, #0
+JMP EXIT_<xx>
+EQ_<xx>: MOV A, #1
+EXIT_<xx>:
+>>
+
+comparision_notequal(p1,p2) ::= <<
+<twoop(p1,p2)>
+CMP A,B
+>>
+
+comparision_grather(p1, p2, xx) ::= <<
+<twoop(p1,p2)>
+SUB A,B
+JLE EQ_<xx>
+MOV A, #0
+JMP EXIT_<xx>
+EQ_<xx>: MOV A, #1
+EXIT_<xx>:
+>>
+
+comparision_lower(p1, p2, xx) ::= <<
+<twoop(p1,p2)>
+SUB A,B
+JGE EQ_<xx>
+MOV A, #0
+JMP EXIT_<xx>
+EQ_<xx>: MOV A, #1
+EXIT_<xx>:
+>>
+
+twoop(p1, p2) ::= <<
+<p2>
+PUSH A
+<p2>
+PUSH B
+>>
+
+dodaj(p1, p2) ::= <<
+<twoop(p1,p2)>
+ADD A,B
+>>
+
+odejmij(p1, p2) ::= <<
+<twoop(p1,p2)>
+SUB A,B
+>>
+
+pentlaif(warunek, then, else_, xx) ::= <<
+<warunek>
+JE label_else_<xx>
+<then>
+JMP label_endif_<xx>
+label_else_<xx>:
+<else_>
+label_endif_<xx>:
+>>
+
+
+petlafor(p1, p2, n) ::=<<
+<p1>
+JE for_end<n>
+for_<n>
+PUSH A
+<p2>
+MOV A,
+PUSH A
+POP B
+POP A
+SUB A,B
+JNE for_<n>
+for_end_<n>:
+>>
+
+dek(n) ::= <<
+DD <n>
+>>
